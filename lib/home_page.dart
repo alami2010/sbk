@@ -5,6 +5,8 @@ import 'package:meditation/icons.dart';
 import 'package:meditation/widgets/profile_page.dart';
 import 'package:meditation/widgets/svg_asset.dart';
 
+import 'menu_drawer.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,9 +31,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Hello youssefx')),
+      drawer: MenuDrawer(),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       bottomNavigationBar: Theme(
         data: ThemeData(
           highlightColor: Colors.transparent,
@@ -45,8 +49,8 @@ class _HomePageState extends State<HomePage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: SvgAsset(assetName: AssetName.discover),
-              label: '',
-              tooltip: 'Discover',
+              label: 'x',
+              tooltip: 'DiscoverCx',
               activeIcon: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -90,14 +94,14 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                        color: Color(0xff4A80F0).withOpacity(0.3),
+                        color: Color(0xff305ebd).withOpacity(0.3),
                         offset: Offset(0, 4),
                         blurRadius: 20),
                   ],
                 ),
                 child: SvgAsset(
                   assetName: AssetName.profile,
-                  color: Color(0xff4A80F0),
+                  color: Color(0xff0fa3e8),
                 ),
               ),
             ),
@@ -105,7 +109,7 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
-          backgroundColor: Color(0xff1C2031),
+          backgroundColor: Color(0xff1542e3),
         ),
       ),
     );

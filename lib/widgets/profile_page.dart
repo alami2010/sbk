@@ -7,8 +7,11 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff121421),
-      body: Container(),
+       body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/dancing_02.jpg'),
+                  fit: BoxFit.cover))),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:meditation/icons.dart';
 import 'package:meditation/widgets/svg_asset.dart';
@@ -18,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff121421),
+      backgroundColor: Colors.amber,
       body: SafeArea(
         child: Stack(
           children: [
@@ -31,10 +32,10 @@ class _DetailPageState extends State<DetailPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 28.w),
                   child: Hero(
-                  tag: "sleepMeditation",
+                    tag: "sleepMeditation",
                     child: Material(
                       color: Colors.transparent,
-                      child: Text("Sleep Meditation",
+                      child: Text("Salsa Soiree",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 34.w,
@@ -64,38 +65,24 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       SizedBox(width: 28.w),
                       Container(
-                        height: 280.w,
-                        width: 280.w,
+                        height: 300.w,
+                        width: 320.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage("assets/pics/pic1.png"),
+                            image: AssetImage("assets/dancing_06.jpg"),
                           ),
                         ),
                       ),
-                      SizedBox(width: 20.w),
-                      Container(
-                        height: 280.w,
-                        width: 280.w,
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              "assets/pics/pic2.jpg",
-                            ),
-                          ),
-                        ),
-                      )
+
                     ],
                   ),
                 ),
                 SizedBox(height: 32.h),
                 Padding(
-                  padding: EdgeInsets.only(left: 28.w),
-                  child: Row(
+                  padding: EdgeInsets.only(left: 10.w),
+                  child: Column(
                     children: [
                       Container(
                         height: 56.w,
@@ -104,11 +91,10 @@ class _DetailPageState extends State<DetailPage> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white.withOpacity(0.1),
                         ),
-                        child: Center(
-                            child: SvgAsset(
-                                assetName: AssetName.headphone,
-                                height: 28.w,
-                                width: 28.w)),
+                        child: SvgAsset(
+                            assetName: AssetName.headphone,
+                            height: 28.w,
+                            width: 28.w),
                       ),
                       SizedBox(width: 16.w),
                       Container(
@@ -118,92 +104,93 @@ class _DetailPageState extends State<DetailPage> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white.withOpacity(0.1),
                         ),
-                        child: Center(
-                            child: SvgAsset(
-                                assetName: AssetName.tape,
-                                height: 28.w,
-                                width: 28.w)),
+                        child: SvgAsset(
+                            assetName: AssetName.tape,
+                            height: 28.w,
+                            width: 28.w),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(height: 46.h),
                 Padding(
-                  padding: EdgeInsets.only(left: 28.w, right: 28.w, bottom: 80.h),
+                  padding: EdgeInsets.only(
+                      left: 28.w, right: 28.w, bottom: 80.h),
                   child: Text(
-                    "Meditation is a practice where an individual uses a technique – such as mindfulness, or focusing their mind on a particular object, thought or activity – to train attention and awareness, and achieve a mentally clear and emotionally calm and stable state. Scholars have found meditation difficult to define, as practices vary both between traditions and within them.",
+                    "Tous les Mercredi depuis 10 ans, les mercredis SBK au Cityrock de Chambourcy sont devenus une référence ˆˆ Une ambiance conviviale, un super cadre, de la bonne musique et le cocktail est prêt ! Tout commence à 20H avec un cours d'initiation SALSA aux base de la Rueda de Casino ! 20h : Cours initiation Salsa Rueda 20h30 Cours Salsa Rueda de Casino évolutif avec bcp de fun ! 21h15 Cours de bachata évolutif ! 22h : Début de soirée SBK jusqu'à 1H ! Entrée + soft 10 euros Parking sur place Restauration possible (entrée offerte si vous dinez sur place) Voir moins.",
                     style: TextStyle(
                         color: Color(0xffffffff).withOpacity(0.7),
                         fontWeight: FontWeight.w400,
                         fontSize: 16.w),
                   ),
-                )
+                ),SizedBox(height: 46.h),
+
               ],
             ),
 
             Align(alignment: Alignment.topCenter,
-            child:   Container(
-              color:  Color(0xff121421),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 22.w,
-                  right: 22.w,
-                  top: 20.h,
-                  bottom: 10.h
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        borderRadius: BorderRadius.circular(360),
-                        onTap: onBackIconTapped,
-                        child: Container(
-                          height: 35.w,
-                          width: 35.w,
-                          decoration: BoxDecoration(
+                child: Container(
+                  color: Color(0xff121421),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 22.w,
+                        right: 22.w,
+                        top: 20.h,
+                        bottom: 10.h
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
                             borderRadius: BorderRadius.circular(360),
-                          ),
-                          child: Center(
-                            child: SvgAsset(
-                              assetName: AssetName.back,
-                              height: 20.w,
-                              width: 20.w,
+                            onTap: onBackIconTapped,
+                            child: Container(
+                              height: 35.w,
+                              width: 35.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(360),
+                              ),
+                              child: Center(
+                                child: SvgAsset(
+                                  assetName: AssetName.back,
+                                  height: 20.w,
+                                  width: 20.w,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
 
 
-                      InkWell(
-                        borderRadius: BorderRadius.circular(360),
-                        onTap: onHeartIconTapped,
-                        child: Container(
-                          height: 35.w,
-                          width: 35.w,
-                          decoration: BoxDecoration(
+                          InkWell(
                             borderRadius: BorderRadius.circular(360),
-                          ),
-                          child: Center(
-                            child: SvgAsset(
-                              assetName: AssetName.heart,
-                              height: 24.w,
-                              width: 24.w,
-                              color: isHeartIconTapped! ? Colors.red: Colors.white,
+                            onTap: onHeartIconTapped,
+                            child: Container(
+                              height: 35.w,
+                              width: 35.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(360),
+                              ),
+                              child: Center(
+                                child: SvgAsset(
+                                  assetName: AssetName.heart,
+                                  height: 24.w,
+                                  width: 24.w,
+                                  color: isHeartIconTapped!
+                                      ? Colors.red
+                                      : Colors.white,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+
+
+                        ],
                       ),
-
-
-
-
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            )
+                )
             ),
 
             Align(
@@ -211,36 +198,19 @@ class _DetailPageState extends State<DetailPage> {
               child: Container(
                 height: 87.h,
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  gradient: LinearGradient(
-                    stops: [0,1],
-                    colors: [
-                      Color(0xff121421),
-                      Colors.transparent,
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter
-                  )
+                    color: Colors.black,
+                    gradient: LinearGradient(
+                        stops: [0, 1],
+                        colors: [
+                          Color(0xff121421),
+                          Colors.transparent,
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter
+                    )
                 ),
                 child: Center(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(16),
-                      onTap: onStartButtonPressed,
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: Color(0xff4A80F0),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Container(
-                          height: 56.h,
-                          width: 319.w,
-                          child: Center(child: Text("Start", style: TextStyle(fontSize: 16.w, fontWeight: FontWeight.bold,color: Colors.white),)),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: chipList(),
                 ),
               ),
             ),
@@ -257,7 +227,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   void onBackIconTapped() {
-   Get.back();
+    Get.back();
   }
 
   void onHeartIconTapped() {
@@ -265,4 +235,39 @@ class _DetailPageState extends State<DetailPage> {
       isHeartIconTapped = !isHeartIconTapped!;
     });
   }
+
+  Widget _buildChip(String label, Color color, IconData icon) {
+    return Chip(
+      labelPadding: EdgeInsets.all(4.0),
+      avatar: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          child: FaIcon(icon,color: Colors.white)
+
+      ),
+      label: Text(
+        label,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      backgroundColor: color,
+      elevation: 6.0,
+      shadowColor: Colors.grey[60],
+      padding: EdgeInsets.all(8.0),
+    );
+  }
+
+  chipList() {
+    return Wrap(
+      spacing: 10.0,
+      runSpacing: 8.0,
+      children: <Widget>[
+        _buildChip('Facebook', Color(0xff4267b2),FontAwesomeIcons.facebook),
+        _buildChip('Phone', Color(0xFF007f5c),FontAwesomeIcons.phone),
+        _buildChip('Maps', Color(0xfffa0000),FontAwesomeIcons.map),
+      ],
+    );
+  }
+
+
 }
