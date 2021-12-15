@@ -5,7 +5,7 @@ import 'package:meditation/icons.dart';
 import 'package:meditation/widgets/profile_page.dart';
 import 'package:meditation/widgets/svg_asset.dart';
 
-import 'menu_drawer.dart';
+import 'shared/menu_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,11 +31,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hello youssefx')),
+      appBar: AppBar(
+        title: Text('Hello youssefx'),
+        backgroundColor: Colors.transparent,
+      ),
       drawer: MenuDrawer(),
       body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: Theme(
         data: ThemeData(
           highlightColor: Colors.transparent,
@@ -107,9 +110,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
+          selectedItemColor: Colors.amber,
           onTap: _onItemTapped,
-          backgroundColor: Color(0xff1542e3),
+          backgroundColor: Colors.transparent,
         ),
       ),
     );

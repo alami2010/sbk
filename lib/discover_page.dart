@@ -9,7 +9,7 @@ import 'package:meditation/widgets/discover_card.dart';
 import 'package:meditation/widgets/discover_small_card.dart';
 import 'package:meditation/widgets/svg_asset.dart';
 
-import 'menu_drawer.dart';
+import 'shared/menu_drawer.dart';
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({

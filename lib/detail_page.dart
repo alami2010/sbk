@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,10 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   bool? isHeartIconTapped = false;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,69 +80,36 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
                 SizedBox(height: 32.h),
                 Padding(
                   padding: EdgeInsets.only(left: 10.w),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 56.w,
-                        width: 56.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white.withOpacity(0.1),
-                        ),
-                        child: SvgAsset(
-                            assetName: AssetName.headphone,
-                            height: 28.w,
-                            width: 28.w),
-                      ),
-                      SizedBox(width: 16.w),
-                      Container(
-                        height: 56.w,
-                        width: 56.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white.withOpacity(0.1),
-                        ),
-                        child: SvgAsset(
-                            assetName: AssetName.tape,
-                            height: 28.w,
-                            width: 28.w),
-                      ),
-                    ],
-                  ),
+                  child: priceAndPeriod(),
                 ),
                 SizedBox(height: 46.h),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: 28.w, right: 28.w, bottom: 80.h),
+                  padding:
+                      EdgeInsets.only(left: 28.w, right: 28.w, bottom: 80.h),
                   child: Text(
-                    "Tous les Mercredi depuis 10 ans, les mercredis SBK au Cityrock de Chambourcy sont devenus une référence ˆˆ Une ambiance conviviale, un super cadre, de la bonne musique et le cocktail est prêt ! Tout commence à 20H avec un cours d'initiation SALSA aux base de la Rueda de Casino ! 20h : Cours initiation Salsa Rueda 20h30 Cours Salsa Rueda de Casino évolutif avec bcp de fun ! 21h15 Cours de bachata évolutif ! 22h : Début de soirée SBK jusqu'à 1H ! Entrée + soft 10 euros Parking sur place Restauration possible (entrée offerte si vous dinez sur place) Voir moins.",
+                    "Tous les Mercredi depuis 10 ans, les mercredis SBK au Cityrock de Chambourcy sont devenus une référence ˆˆ \n Une ambiance conviviale, un super cadre, de la bonne musique et le cocktail est prêt ! \n Tout commence à 20H avec un cours d'initiation SALSA aux base de la Rueda de Casino ! \n20h : Cours initiation Salsa Rueda 20h30 Cours Salsa Rueda de Casino évolutif avec bcp de fun ! \n21h15 Cours de bachata évolutif ! \n22h : Début de soirée SBK jusqu'à 1H ! \nEntrée + soft 10 euros Parking sur place Restauration possible (entrée offerte si vous dinez sur place) Voir moins.",
                     style: TextStyle(
                         color: Color(0xffffffff).withOpacity(0.7),
                         fontWeight: FontWeight.w400,
-                        fontSize: 16.w),
+                        fontSize: 17.w),
                   ),
-                ),SizedBox(height: 46.h),
-
+                ),
+                SizedBox(height: 46.h)
               ],
             ),
-
-            Align(alignment: Alignment.topCenter,
+            Align(
+                alignment: Alignment.topCenter,
                 child: Container(
                   color: Color(0xff121421),
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: 22.w,
-                        right: 22.w,
-                        top: 20.h,
-                        bottom: 10.h
-                    ),
+                        left: 22.w, right: 22.w, top: 20.h, bottom: 10.h),
                     child: Material(
                       color: Colors.transparent,
                       child: Row(
@@ -161,8 +133,6 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                           ),
-
-
                           InkWell(
                             borderRadius: BorderRadius.circular(360),
                             onTap: onHeartIconTapped,
@@ -184,15 +154,11 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                           ),
-
-
                         ],
                       ),
                     ),
                   ),
-                )
-            ),
-
+                )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -200,31 +166,28 @@ class _DetailPageState extends State<DetailPage> {
                 decoration: BoxDecoration(
                     color: Colors.black,
                     gradient: LinearGradient(
-                        stops: [0, 1],
+                        stops: [
+                          0,
+                          1
+                        ],
                         colors: [
-                          Color(0xff121421),
+                          Colors.black87,
                           Colors.transparent,
                         ],
                         begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter
-                    )
-                ),
+                        end: Alignment.topCenter)),
                 child: Center(
-                  child: chipList(),
+                  child: accessButtonsBotum(),
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
     );
   }
 
-  void onStartButtonPressed() {
-
-  }
+  void onStartButtonPressed() {}
 
   void onBackIconTapped() {
     Get.back();
@@ -241,9 +204,7 @@ class _DetailPageState extends State<DetailPage> {
       labelPadding: EdgeInsets.all(4.0),
       avatar: CircleAvatar(
           backgroundColor: Colors.transparent,
-          child: FaIcon(icon,color: Colors.white)
-
-      ),
+          child: FaIcon(icon, color: Colors.white)),
       label: Text(
         label,
         style: TextStyle(
@@ -257,17 +218,27 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  chipList() {
+  accessButtonsBotum() {
     return Wrap(
       spacing: 10.0,
       runSpacing: 8.0,
       children: <Widget>[
-        _buildChip('Facebook', Color(0xff4267b2),FontAwesomeIcons.facebook),
-        _buildChip('Phone', Color(0xFF007f5c),FontAwesomeIcons.phone),
-        _buildChip('Maps', Color(0xfffa0000),FontAwesomeIcons.map),
+        _buildChip('Facebook', Color(0xff4267b2), FontAwesomeIcons.facebook),
+        _buildChip('Phone', Color(0xFF007f5c), FontAwesomeIcons.phone),
+        _buildChip('Maps', Color(0xfffa0000), FontAwesomeIcons.map),
       ],
     );
   }
 
-
+  priceAndPeriod() {
+    return Wrap(
+      spacing: 10.0,
+      runSpacing: 8.0,
+      children: <Widget>[
+        _buildChip('10', Color(0xff4267b2), FontAwesomeIcons.euroSign),
+        _buildChip('Hebdomadaire (tous les mercredis)', Color(0xFF007f5c),
+            FontAwesomeIcons.times),
+      ],
+    );
+  }
 }

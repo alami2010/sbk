@@ -43,8 +43,8 @@ class DiscoverSmallCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         gradient: LinearGradient(
           colors: [
-            gradientStartColor ?? Color(0xff441DFC),
-            gradientEndColor ?? Color(0xff4E81EB),
+            Colors.grey.withOpacity(0.5),
+            Colors.black,
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,

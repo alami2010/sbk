@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'detail_page.dart';
-import 'login/login.dart';
-import 'login/signup.dart';
+import '../detail_page.dart';
+import '../login/login.dart';
+import '../login/signup.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
