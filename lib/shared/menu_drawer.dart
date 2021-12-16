@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meditation/login/login.dart';
+import 'package:meditation/shared/route.dart';
 
-import '../detail_page.dart';
-import '../login/login.dart';
 import '../login/signup.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -25,11 +25,11 @@ class MenuDrawer extends StatelessWidget {
   }
 
   List<Widget> buildMenuItems(BuildContext context) {
-    final List<String> menuTitles = [
-      'Acceuil',
-      'Se Connecter',
-      'S\'inscrir',
-      'Training'
+    final List<RouteNavigation> menuTitles = [
+      RouteNavigation('Acceuil', SignupPage()),
+      RouteNavigation('Se Connecter', LoginPage()),
+      RouteNavigation('S\'inscrir', SignupPage()),
+      RouteNavigation('Training', SignupPage()),
     ];
 
     final List<Widget> menuItems = [];
@@ -46,15 +46,12 @@ class MenuDrawer extends StatelessWidget {
         child: Container(
           color: Colors.white70,
           child: ListTile(
-             leading: Icon(Icons.access_alarm),
-
-            title: Text(element,
-                style: TextStyle(
-                     fontSize: 18,
-                    color: Colors.black87)),
+            leading: Icon(Icons.access_alarm),
+            title: Text(element.name,
+                style: TextStyle(fontSize: 18, color: Colors.black87)),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SignupPage()));
+                  .push(MaterialPageRoute(builder: (context) => element.page));
             },
           ),
         ),

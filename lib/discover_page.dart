@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:meditation/detail_page.dart';
 import 'package:meditation/icons.dart';
+import 'package:meditation/shared/event.dart';
 import 'package:meditation/widgets/category_boxes.dart';
 import 'package:meditation/widgets/discover_card.dart';
 import 'package:meditation/widgets/discover_small_card.dart';
@@ -21,6 +25,29 @@ class DiscoverPage extends StatefulWidget {
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
+  List<Event> events = [];
+
+  @override
+  void initState() {
+    super.initState();
+    readJson(); //running initialisation code; getting prefs etc.
+  }
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/event.json');
+    final data = await json.decode(response);
+
+    List<Event> myModels =
+        (json.decode(response) as List).map((i) => Event.fromJson(i)).toList();
+    print('youssef');
+    print(myModels);
+
+    setState(() {
+      this.events = myModels;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,55 +176,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       mainAxisSpacing: 10.w),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    DiscoverSmallCard(
-                      onTap: () {
-
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailPage()));
-                      },
-                      subtitle: 'Carrières sur Seinew',
-                      title: "Cours de kizomba",
-                      price: 8,
-                      startTime: '20h00',
-                      gradientStartColor: Color(0xff13DEA0),
-                      gradientEndColor: Color(0xff06B782),
-                    ),
-                    DiscoverSmallCard(
-                      onTap: () {},
-                      title: "Caribe Noche SBK",
-                      subtitle: 'Versailles',
-                      price: 12,
-                      startTime: '20h30',
-                      gradientStartColor: Color(0xffFC67A7),
-                      gradientEndColor: Color(0xffF6815B),
-                      icon: SvgAsset(
-                        assetName: AssetName.tape,
-                        height: 24.w,
-                        width: 24.w,
-                      ),
-                    ),
-                    DiscoverSmallCard(
-                      onTap: () {},
-                      title: "Mercredi SBK",
-                      subtitle: 'Chambourcy',
-                      price: 10,
-                      startTime: '20h00',
-                      gradientStartColor: Color(0xffFFD541),
-                      gradientEndColor: Color(0xffF0B31A),
-                    ),
-                    DiscoverSmallCard(
-                      onTap: onSleepMeditationTapped,
-                      title: "Tips For Sleeping",
-                      subtitle: 'hellos',
-                      startTime: '19h30',
-                      icon: SvgAsset(
-                        assetName: AssetName.tape,
-                        height: 24.w,
-                        width: 24.w,
-                      ),
-                    ),
-                  ],
+                  children: buildDiscoverSmallCard(),
                 ),
               )
             ],
@@ -205,6 +184,37 @@ class _DiscoverPageState extends State<DiscoverPage> {
         ),
       ),
     );
+  }
+
+  List<DiscoverSmallCard> buildDiscoverSmallCard() {
+    List<DiscoverSmallCard> cards = [DiscoverSmallCard(
+        onTap: onSleepMeditationTapped,
+        title: "Tips For Sleeping",
+        subtitle: 'hellos',
+        startTime: '19h30',
+        price: 10,
+        icon: SvgAsset(
+          assetName: AssetName.tape,
+          height: 24.w,
+          width: 24.w,
+        ))];
+
+    this.events.forEach((element) {
+      cards.add(DiscoverSmallCard(
+          event: element,
+          onTap: onSleepMeditationTapped,
+          title: "Tips For Sleeping",
+          subtitle: 'hellos',
+          startTime: '19h30',
+          price: 10,
+          icon: SvgAsset(
+            assetName: AssetName.tape,
+            height: 24.w,
+            width: 24.w,
+          )));
+    });
+
+    return cards;
   }
 
   void onSeeAllTapped() {}

@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meditation/icons.dart';
+import 'package:meditation/shared/event.dart';
 import 'package:meditation/widgets/svg_asset.dart';
 
 class DiscoverSmallCard extends StatelessWidget {
+  final Event? event;
   final String? title;
   final String? subtitle;
   final String? startTime;
@@ -21,6 +23,7 @@ class DiscoverSmallCard extends StatelessWidget {
 
   const DiscoverSmallCard(
       {Key? key,
+      this.event,
       this.title,
       this.startTime,
       this.price,
@@ -91,14 +94,14 @@ class DiscoverSmallCard extends StatelessWidget {
                       Text(
                         title!,
                         style: TextStyle(
-                            fontSize: 18.w,
+                            fontSize: 15.w,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                       Text(
                         subtitle!,
                         style: TextStyle(
-                            fontSize: 15.w,
+                            fontSize: 10.w,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),

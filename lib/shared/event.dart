@@ -39,4 +39,35 @@ class Event {
       this.email,
       this.description); // function
   void disp() {}
+
+  factory Event.fromJson(dynamic json) {
+    return Event(
+        checkDouble(json['id']),
+        json['title'] as String,
+        json['date'] as String,
+        json['startHour'] as String,
+        json['endHour'] as String,
+        json['period'] as String,
+        checkDouble(json['price']),
+        json['type'] as String,
+        json['isLive'] as bool,
+        json['country'] as String,
+        json['address'] as String,
+        json['addLat'] as String,
+        json['addLong'] as String,
+        json['image'] as String,
+        json['link'] as String,
+        json['phone'] as String,
+        json['email'] as String,
+        json['description'] as String);
+  }
+  static double checkDouble(dynamic value) {
+    if (value is String) {
+      return double.parse(value);
+    } else {
+      return value.toDouble();
+    }
+  }
 }
+
+
