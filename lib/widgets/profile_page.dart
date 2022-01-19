@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -8,9 +9,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        body: Container(
-          decoration: BoxDecoration(
+           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/dancing_02.jpg'),
+                  image: AssetImage('assets/dancing_14.jpg'),
                   fit: BoxFit.cover))),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meditation/login/login.dart';
+import 'package:meditation/profil/authPage.dart';
 import 'package:meditation/shared/route.dart';
 
-import '../login/signup.dart';
+ import '../login/signup.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -28,16 +29,13 @@ class MenuDrawer extends StatelessWidget {
     final List<RouteNavigation> menuTitles = [
       RouteNavigation('Acceuil', SignupPage()),
       RouteNavigation('Se Connecter', LoginPage()),
-      RouteNavigation('S\'inscrir', SignupPage()),
-      RouteNavigation('Training', SignupPage()),
+      RouteNavigation('S\'inscrir',AuthPage(isLogin: true)),
+      RouteNavigation('Trainingx', AuthPage(isLogin: false)),
     ];
 
     final List<Widget> menuItems = [];
     menuItems.add(DrawerHeader(
-      child: Text(
-        'Hlobox',
-        style: TextStyle(color: Colors.white, fontSize: 28),
-      ),
+      child: Image.asset('assets/logo2.png')
     ));
 
     menuTitles.forEach((element) {

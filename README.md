@@ -9,8 +9,8 @@ A Meditation App UI template made using flutter and dart.
 
 ### Created & Maintained By
 
-[Adeebullah Adab](https://github.com/iamadeeb) 
-([Instagram](https://www.instagram.com/iamadeeb)) ([LinkedIn](https://www.linkedin.com/in/adeebullah-adab-a95523109))
+[Youssef DAHAR](https://github.com/alami2010)
+([Instagram](https://www.instagram.com/youssef_dahar_alami)) ([LinkedIn](https://www.linkedin.com/in/youssef.dahar))
 
 
 

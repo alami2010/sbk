@@ -6,7 +6,7 @@ class RouteNavigation {
   Widget page;
 
   RouteNavigation(
-      this.name,
-      this.page,
-      );
+    this.name,
+    this.page,
+  );
 }

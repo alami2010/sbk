@@ -12,8 +12,11 @@ import 'package:meditation/widgets/category_boxes.dart';
 import 'package:meditation/widgets/discover_card.dart';
 import 'package:meditation/widgets/discover_small_card.dart';
 import 'package:meditation/widgets/svg_asset.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'shared/menu_drawer.dart';
+
+enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({
@@ -26,6 +29,30 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage> {
   List<Event> events = [];
+  DateTime _selectedDate = DateTime.now();
+  WhyFarther? _selection;
+
+  void _pickDateDialog() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            //which date will display when user open the picker
+            firstDate: DateTime.now(),
+            lastDate: DateTime(
+                2030)) //what will be the up to supported date in picker
+        .then((pickedDate) {
+      //then usually do the future job
+      if (pickedDate == null) {
+        //if user tap cancel then this function will stop
+        return;
+      }
+      setState(() {
+        //for rebuilding the ui
+        _selectedDate = pickedDate;
+        print(_selectedDate);
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -64,16 +91,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 padding: EdgeInsets.only(
                   left: 28.w,
                   right: 18.w,
-                  top: 36.h,
+                  top: 0.h,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("DiscoverxX",
-                        style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 34.w,
-                            fontWeight: FontWeight.bold)),
+                    Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 100,
+                        child: Image.asset('assets/logo.png')),
                     InkWell(
                       borderRadius: BorderRadius.circular(360),
                       onTap: onSearchIconTapped,
@@ -118,24 +144,56 @@ class _DiscoverPageState extends State<DiscoverPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 28.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Recommendexxxd",
-                      style: TextStyle(
-                          color: Color(0xff515979),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.w),
-                    ),
-                    GestureDetector(
-                        onTap: onSeeAllTapped,
-                        child: Text("See All",
-                            style: TextStyle(
-                                color: Color(0xff4A80F0),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14.w)))
-                  ],
+                child: Container(
+                  color: Colors.white70,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // This is the type used by the popup menu below.
+                      popupMenu,
+                      PopupMenuButton<WhyFarther>(
+                        onSelected: (WhyFarther result) {
+                          setState(() {
+                            _selection = result;
+                          });
+                        },
+                        color: Colors.white70,
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<WhyFarther>>[
+                          const PopupMenuItem<WhyFarther>(
+                            value: WhyFarther.harder,
+                            child: Text('Working a lot harder'),
+                          ),
+                          const PopupMenuItem<WhyFarther>(
+                            value: WhyFarther.smarter,
+                            child: Text('Being a lot smarter'),
+                          ),
+                          const PopupMenuItem<WhyFarther>(
+                            value: WhyFarther.selfStarter,
+                            child: Text('Being a self-starter'),
+                          ),
+                          const PopupMenuItem<WhyFarther>(
+                            value: WhyFarther.tradingCharter,
+                            child: Text('Placed in charge of trading charter'),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "Recommendexxxd",
+                        style: TextStyle(
+                            color: Color(0xff515979),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.w),
+                      ),
+                      GestureDetector(
+                          onTap: onSeeAllTapped,
+                          child: Text("See All",
+                              style: TextStyle(
+                                  color: Color(0xff4A80F0),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.w)))
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -150,7 +208,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     SizedBox(width: 28.w),
                     DiscoverCard(
                       tag: "sleepMeditation",
-                      onTap: onSleepMeditationTapped,
+                      onTap: () {
+                        onSleepMeditationTapped();
+                      },
                       title: "Sleep Meditation",
                       subtitle: "7 Day Audio and Video Series",
                     ),
@@ -187,26 +247,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
   }
 
   List<DiscoverSmallCard> buildDiscoverSmallCard() {
-    List<DiscoverSmallCard> cards = [DiscoverSmallCard(
-        onTap: onSleepMeditationTapped,
-        title: "Tips For Sleeping",
-        subtitle: 'hellos',
-        startTime: '19h30',
-        price: 10,
-        icon: SvgAsset(
-          assetName: AssetName.tape,
-          height: 24.w,
-          width: 24.w,
-        ))];
+    List<DiscoverSmallCard> cards = [];
 
     this.events.forEach((element) {
       cards.add(DiscoverSmallCard(
           event: element,
-          onTap: onSleepMeditationTapped,
-          title: "Tips For Sleeping",
-          subtitle: 'hellos',
-          startTime: '19h30',
-          price: 10,
+          onTap: () {
+            goToDetail(element);
+          },
           icon: SvgAsset(
             assetName: AssetName.tape,
             height: 24.w,
@@ -217,14 +265,72 @@ class _DiscoverPageState extends State<DiscoverPage> {
     return cards;
   }
 
-  void onSeeAllTapped() {}
+  void onSeeAllTapped() {
+    _pickDateDialog();
+
+// This menu button widget updates a _selection field (of type WhyFarther,
+// not shown here).
+  }
 
   void onSleepMeditationTapped() {
     print('hellox');
-    Get.to(() => DetailPage(), transition: Transition.rightToLeft);
+  }
+
+  void goToDetail(Event event) {
+    print('hellox' + event.toString());
+    Get.to(() => DetailPage(event), transition: Transition.rightToLeft);
   }
 
   void onDepressionHealingTapped() {}
 
-  void onSearchIconTapped() {}
+  void onSearchIconTapped() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.white12,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('Modal BottomSheet'),
+                ElevatedButton(
+                  child: const Text('Close BottomSheet'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _doSomething(String value) {
+    print(value);
+  }
+
+  _launchMaps() async {
+    const url =
+        "https://www.google.com/maps/search/?api=1&query=LATITUDE,LONGITUDE,17&query_place_id=PLACE_ID";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch Maps';
+    }
+  }
+
+  late final popupMenu = new PopupMenuButton(
+    child: new ListTile(
+      title: new Text('Doge or lion?'),
+      trailing: const Icon(Icons.more_vert),
+    ),
+    itemBuilder: (_) => <PopupMenuItem<String>>[
+      new PopupMenuItem<String>(child: new Text('Doge'), value: 'Doge'),
+      new PopupMenuItem<String>(child: new Text('Lion'), value: 'Lion'),
+    ],
+    onSelected: (value) => _doSomething(value),
+  );
 }

@@ -7,14 +7,10 @@ import 'package:meditation/widgets/svg_asset.dart';
 
 class DiscoverSmallCard extends StatelessWidget {
   final Event? event;
-  final String? title;
-  final String? subtitle;
-  final String? startTime;
   final Color? gradientStartColor;
   final Color? gradientEndColor;
   final double? height;
   final double? width;
-  final double? price;
   final Widget? vectorBottom;
   final Widget? vectorTop;
   final double? borderRadius;
@@ -24,10 +20,6 @@ class DiscoverSmallCard extends StatelessWidget {
   const DiscoverSmallCard(
       {Key? key,
       this.event,
-      this.title,
-      this.startTime,
-      this.price,
-      this.subtitle,
       this.gradientStartColor,
       this.gradientEndColor,
       this.height,
@@ -38,6 +30,9 @@ class DiscoverSmallCard extends StatelessWidget {
       this.icon,
       this.onTap})
       : super(key: key);
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +79,7 @@ class DiscoverSmallCard extends StatelessWidget {
               ),
               SizedBox(
                 height: 125.w,
-                width: 200.w,
+                width: 300.w,
                 child: Padding(
                   padding: EdgeInsets.only(left: 20.w, top: 20.w, bottom: 2.w),
                   child: Column(
@@ -92,14 +87,14 @@ class DiscoverSmallCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        title!,
+                        event!.title,
                         style: TextStyle(
                             fontSize: 15.w,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                       Text(
-                        subtitle!,
+                        event!.phone,
                         style: TextStyle(
                             fontSize: 10.w,
                             fontWeight: FontWeight.bold,
@@ -108,12 +103,12 @@ class DiscoverSmallCard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(price.toString() + ' €',
+                          Text(event!.price.toString() + ' €',
                               style: TextStyle(
                                   fontSize: 15.w,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white)),
-                          Text(startTime!,
+                          Text(event!.startHour,
                               style: TextStyle(
                                   fontSize: 15.w,
                                   fontWeight: FontWeight.bold,
@@ -159,4 +154,7 @@ class DiscoverSmallCard extends StatelessWidget {
       ),
     );
   }
+
+
+
 }
