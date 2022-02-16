@@ -3,6 +3,10 @@
    <application
         android:label="Go dance"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyC0sH8Uj4OWHIWphGdaUu1UegVDUflTaeo"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -34,5 +38,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+
+
     </application>
 </manifest>

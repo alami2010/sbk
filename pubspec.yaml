@@ -18,6 +18,7 @@ dependencies:
   lo_form: ^0.1.2
   google_fonts: ^2.1.0
   url_launcher: ^6.0.17
+  google_maps_flutter: ^2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
         title: Text('Hello youssefx'),
         backgroundColor: Colors.transparent,
       ),
+
       drawer: MenuDrawer(),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

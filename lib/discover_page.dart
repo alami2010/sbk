@@ -14,6 +14,7 @@ import 'package:meditation/widgets/discover_small_card.dart';
 import 'package:meditation/widgets/svg_asset.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'drop_down.dart';
 import 'shared/menu_drawer.dart';
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
@@ -31,7 +32,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
   List<Event> events = [];
   DateTime _selectedDate = DateTime.now();
   WhyFarther? _selection;
-
+  TextEditingController  textEditingController =  TextEditingController();
   void _pickDateDialog() {
     showDatePicker(
             context: context,
@@ -65,10 +66,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
     final String response = await rootBundle.loadString('assets/event.json');
     final data = await json.decode(response);
 
-    List<Event> myModels =
-        (json.decode(response) as List).map((i) => Event.fromJson(i)).toList();
-    print('youssef');
-    print(myModels);
+    List<Event> myModels = (json.decode(response) as List).map((i) => Event.fromJson(i)).toList();
+     print(myModels);
 
     setState(() {
       this.events = myModels;
@@ -83,10 +82,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/dancing_02.jpg'), fit: BoxFit.cover)),
-        child: SafeArea(
-          child: ListView(
-            physics: BouncingScrollPhysics(),
-            children: [
+        child: SingleChildScrollView(
+          child: Column(
+             children: [
               Padding(
                 padding: EdgeInsets.only(
                   left: 28.w,
@@ -185,6 +183,28 @@ class _DiscoverPageState extends State<DiscoverPage> {
                             fontWeight: FontWeight.w500,
                             fontSize: 14.w),
                       ),
+                      ElevatedButton(onPressed: (){
+
+                        DropDownState(
+                          DropDown(
+                            submitButtonText:  "done",
+                            submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
+                            searchHintText: "kSearch",
+                            bottomSheetTitle: "kCities",
+                            searchBackgroundColor: Colors.lightGreenAccent,
+                            dataList:  [SelectedListItem(false,'ehllo') ,SelectedListItem(false,'fffff'),SelectedListItem(false,'dedede'),SelectedListItem(true,'fgttlolol')  ],
+                            selectedItems: (List<dynamic> selectedList) {
+                              print(selectedList.toString());
+                            },
+                            selectedItem: (String selected) {
+                              print(selected);
+
+                            },
+                            enableMultipleSelection: false,
+                            searchController: textEditingController,
+                          ),
+                        ).showModal(context);
+                      }, child: Text("testx")),
                       GestureDetector(
                           onTap: onSeeAllTapped,
                           child: Text("See All",
