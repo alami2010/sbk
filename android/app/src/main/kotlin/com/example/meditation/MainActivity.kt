@@ -1,4 +1,4 @@
-package com.example.meditation
+package com.go.dance
 
 import io.flutter.embedding.android.FlutterActivity
 

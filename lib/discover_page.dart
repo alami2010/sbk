@@ -5,16 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:meditation/detail_page.dart';
-import 'package:meditation/icons.dart';
-import 'package:meditation/shared/event.dart';
-import 'package:meditation/widgets/category_boxes.dart';
-import 'package:meditation/widgets/discover_card.dart';
-import 'package:meditation/widgets/discover_small_card.dart';
-import 'package:meditation/widgets/svg_asset.dart';
+import 'package:go_dance/shared/event.dart';
+import 'package:go_dance/widgets/discover_card.dart';
+import 'package:go_dance/widgets/discover_small_card.dart';
+import 'package:go_dance/widgets/svg_asset.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'detail_page.dart';
 import 'drop_down.dart';
+import 'icons.dart';
 import 'shared/menu_drawer.dart';
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
@@ -32,7 +31,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
   List<Event> events = [];
   DateTime _selectedDate = DateTime.now();
   WhyFarther? _selection;
-  TextEditingController  textEditingController =  TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
+
   void _pickDateDialog() {
     showDatePicker(
             context: context,
@@ -66,8 +66,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
     final String response = await rootBundle.loadString('assets/event.json');
     final data = await json.decode(response);
 
-    List<Event> myModels = (json.decode(response) as List).map((i) => Event.fromJson(i)).toList();
-     print(myModels);
+    List<Event> myModels =
+        (json.decode(response) as List).map((i) => Event.fromJson(i)).toList();
+    print(myModels);
 
     setState(() {
       this.events = myModels;
@@ -84,7 +85,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 image: AssetImage('assets/dancing_02.jpg'), fit: BoxFit.cover)),
         child: SingleChildScrollView(
           child: Column(
-             children: [
+            children: [
               Padding(
                 padding: EdgeInsets.only(
                   left: 28.w,
@@ -94,48 +95,22 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: 100,
-                        child: Image.asset('assets/logo.png')),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(360),
-                      onTap: onSearchIconTapped,
-                      child: Container(
-                        height: 35.w,
-                        width: 35.w,
-                        child: Center(
-                          child: SvgAsset(
-                            assetName: AssetName.search,
-                            height: 24.w,
-                            width: 24.w,
-                          ),
-                        ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      onPressed: () {},
+                      child: Row(
+                        children: <Widget>[Text('Filtres'), Icon(Icons.apps)],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 120.h,
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: 90.w,
-                    ),
-                    CategoryBoxes(
-                      text: "Salsa",
-                      onPressed: (value) => print(value),
-                    ),
-                    CategoryBoxes(
-                      text: "Batchata",
-                      onPressed: (value) => print(value),
-                    ),
-                    CategoryBoxes(
-                      text: "Kizomba",
-                      onPressed: (value) => print(value),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      onPressed: () {},
+                      child: Row(
+                        children: <Widget>[
+                          Text('Autour de moi'),
+                          Icon(Icons.apps)
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -147,71 +122,27 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // This is the type used by the popup menu below.
-                      popupMenu,
-                      PopupMenuButton<WhyFarther>(
-                        onSelected: (WhyFarther result) {
-                          setState(() {
-                            _selection = result;
-                          });
+                      new ListTile(
+                        onTap: () {
+                          selectVilleFilter(context);
                         },
-                        color: Colors.white70,
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<WhyFarther>>[
-                          const PopupMenuItem<WhyFarther>(
-                            value: WhyFarther.harder,
-                            child: Text('Working a lot harder'),
-                          ),
-                          const PopupMenuItem<WhyFarther>(
-                            value: WhyFarther.smarter,
-                            child: Text('Being a lot smarter'),
-                          ),
-                          const PopupMenuItem<WhyFarther>(
-                            value: WhyFarther.selfStarter,
-                            child: Text('Being a self-starter'),
-                          ),
-                          const PopupMenuItem<WhyFarther>(
-                            value: WhyFarther.tradingCharter,
-                            child: Text('Placed in charge of trading charter'),
-                          ),
-                        ],
+                        title: new Text('Ville'),
+                        trailing: const Icon(Icons.more_vert),
                       ),
-                      Text(
-                        "Recommendexxxd",
-                        style: TextStyle(
-                            color: Color(0xff515979),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.w),
+                      new ListTile(
+                        onTap: () {
+                          selectDanceFilter(context);
+                        },
+                        title: new Text('Dance'),
+                        trailing: const Icon(Icons.more_vert),
                       ),
-                      ElevatedButton(onPressed: (){
-
-                        DropDownState(
-                          DropDown(
-                            submitButtonText:  "done",
-                            submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
-                            searchHintText: "kSearch",
-                            bottomSheetTitle: "kCities",
-                            searchBackgroundColor: Colors.lightGreenAccent,
-                            dataList:  [SelectedListItem(false,'ehllo') ,SelectedListItem(false,'fffff'),SelectedListItem(false,'dedede'),SelectedListItem(true,'fgttlolol')  ],
-                            selectedItems: (List<dynamic> selectedList) {
-                              print(selectedList.toString());
-                            },
-                            selectedItem: (String selected) {
-                              print(selected);
-
-                            },
-                            enableMultipleSelection: false,
-                            searchController: textEditingController,
-                          ),
-                        ).showModal(context);
-                      }, child: Text("testx")),
-                      GestureDetector(
-                          onTap: onSeeAllTapped,
-                          child: Text("See All",
-                              style: TextStyle(
-                                  color: Color(0xff4A80F0),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.w)))
+                      new ListTile(
+                        onTap: () {
+                          _pickDateDialog();
+                        },
+                        title: new Text('Date'),
+                        trailing: const Icon(Icons.more_vert),
+                      ),
                     ],
                   ),
                 ),
@@ -264,6 +195,56 @@ class _DiscoverPageState extends State<DiscoverPage> {
         ),
       ),
     );
+  }
+
+  void selectDanceFilter(BuildContext context) {
+    DropDownState(
+      DropDown(
+        submitButtonText: "Valider",
+        submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
+        searchHintText: "Selectionnez une dance",
+        bottomSheetTitle: "Dances",
+        searchBackgroundColor: Colors.blue,
+        dataList: [
+          SelectedListItem(false, 'SALSA'),
+          SelectedListItem(false, 'KIZOMBA'),
+          SelectedListItem(false, 'BATCHATA')
+        ],
+        selectedItems: (List<dynamic> selectedList) {
+          print(selectedList.toString());
+        },
+        selectedItem: (String selected) {
+          print(selected);
+        },
+        enableMultipleSelection: true,
+        searchController: textEditingController,
+      ),
+    ).showModal(context);
+  }
+
+  void selectVilleFilter(BuildContext context) {
+    DropDownState(
+      DropDown(
+        submitButtonText: "Valider",
+        submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
+        searchHintText: "Selectionnez votre ville",
+        bottomSheetTitle: "Villes",
+        searchBackgroundColor: Colors.blue,
+        dataList: [
+          SelectedListItem(false, 'Montigny le bretonneux'),
+          SelectedListItem(false, 'Poissy'),
+          SelectedListItem(false, 'Creteil')
+        ],
+        selectedItems: (List<dynamic> selectedList) {
+          print(selectedList.toString());
+        },
+        selectedItem: (String selected) {
+          print(selected);
+        },
+        enableMultipleSelection: true,
+        searchController: textEditingController,
+      ),
+    ).showModal(context);
   }
 
   List<DiscoverSmallCard> buildDiscoverSmallCard() {
@@ -341,16 +322,4 @@ class _DiscoverPageState extends State<DiscoverPage> {
       throw 'Could not launch Maps';
     }
   }
-
-  late final popupMenu = new PopupMenuButton(
-    child: new ListTile(
-      title: new Text('Doge or lion?'),
-      trailing: const Icon(Icons.more_vert),
-    ),
-    itemBuilder: (_) => <PopupMenuItem<String>>[
-      new PopupMenuItem<String>(child: new Text('Doge'), value: 'Doge'),
-      new PopupMenuItem<String>(child: new Text('Lion'), value: 'Lion'),
-    ],
-    onSelected: (value) => _doSomething(value),
-  );
 }

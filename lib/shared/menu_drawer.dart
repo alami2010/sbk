@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meditation/login/login.dart';
-import 'package:meditation/profil/authPage.dart';
-import 'package:meditation/shared/route.dart';
+import 'package:go_dance/login/login.dart';
+import 'package:go_dance/profil/authPage.dart';
+import 'package:go_dance/shared/route.dart';
 
- import '../login/signup.dart';
+import '../login/signup.dart';
 import '../map.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -30,15 +30,13 @@ class MenuDrawer extends StatelessWidget {
     final List<RouteNavigation> menuTitles = [
       RouteNavigation('Acceuil', SignupPage()),
       RouteNavigation('Se Connecter', LoginPage()),
-      RouteNavigation('S\'inscrir',AuthPage(isLogin: true)),
+      RouteNavigation('S\'inscrir', AuthPage(isLogin: true)),
       RouteNavigation('Trainingx', AuthPage(isLogin: false)),
       RouteNavigation('Map', MapSample()),
     ];
 
     final List<Widget> menuItems = [];
-    menuItems.add(DrawerHeader(
-      child: Image.asset('assets/logo2.png')
-    ));
+    menuItems.add(DrawerHeader(child: Image.asset('assets/logo2.png')));
 
     menuTitles.forEach((element) {
       menuItems.add(ClipRRect(

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meditation/icons.dart';
-import 'package:meditation/shared/event.dart';
-import 'package:meditation/widgets/svg_asset.dart';
+import 'package:go_dance/shared/event.dart';
+import 'package:go_dance/widgets/svg_asset.dart';
+
+
+import '../icons.dart';
 
 class DiscoverSmallCard extends StatelessWidget {
   final Event? event;

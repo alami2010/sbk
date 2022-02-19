@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meditation/charts_page.dart';
-import 'package:meditation/discover_page.dart';
-import 'package:meditation/icons.dart';
-import 'package:meditation/widgets/profile_page.dart';
-import 'package:meditation/widgets/svg_asset.dart';
+import 'package:go_dance/widgets/profile_page.dart';
+import 'package:go_dance/widgets/svg_asset.dart';
 
+
+import 'charts_page.dart';
+import 'discover_page.dart';
+import 'icons.dart';
 import 'shared/menu_drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,8 +33,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hello youssefx'),
-        backgroundColor: Colors.transparent,
+        title:    Container(
+            width: MediaQuery.of(context).size.width / 2,
+            height: 100,
+            child: Image.asset('assets/logo.png')),
+        backgroundColor: Colors.black,
       ),
 
       drawer: MenuDrawer(),

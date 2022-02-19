@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meditation/icons.dart';
+
+import '../icons.dart';
 
 class SvgAsset extends StatelessWidget {
   final AssetName? assetName;
@@ -18,7 +19,7 @@ class SvgAsset extends StatelessWidget {
       height: height,
       width: width,
       child: SvgPicture.asset(
-        MeditationSvgAssets().assets[assetName]!,
+        DanceSvgAssets().assets[assetName]!,
         fit: fit ?? BoxFit.cover,
         color: color,
       ),

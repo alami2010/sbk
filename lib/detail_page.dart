@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:meditation/icons.dart';
-import 'package:meditation/shared/event.dart';
-import 'package:meditation/shared/utils.dart';
-import 'package:meditation/widgets/svg_asset.dart';
+import 'package:go_dance/shared/event.dart';
+import 'package:go_dance/shared/utils.dart';
+import 'package:go_dance/widgets/svg_asset.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'icons.dart';
 
 class DetailPage extends StatefulWidget {
   final Event event;

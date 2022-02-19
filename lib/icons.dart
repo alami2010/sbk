@@ -1,11 +1,11 @@
-class MeditationSvgAssets {
-  static final MeditationSvgAssets _instance = MeditationSvgAssets._internal();
+class DanceSvgAssets {
+  static final DanceSvgAssets _instance = DanceSvgAssets._internal();
 
-  factory MeditationSvgAssets() {
+  factory DanceSvgAssets() {
     return _instance;
   }
 
-  MeditationSvgAssets._internal();
+  DanceSvgAssets._internal();
 
   Map<AssetName, String> assets = {
     AssetName.search: "assets/icons/search.svg",
